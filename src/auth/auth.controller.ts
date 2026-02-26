@@ -13,7 +13,7 @@ import { AuthDto } from './dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('sign-up')
+  @Post('signup')
   signup(@Body(new ValidationPipe({ whitelist: true })) dto: AuthDto) {
     console.log(dto);
     return this.authService.signup({
@@ -23,7 +23,7 @@ export class AuthController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Post('sign-in')
+  @Post('signin')
   signin(@Body(new ValidationPipe({ whitelist: true })) dto: AuthDto) {
     return this.authService.signin({ ...dto, hash: dto.password });
   }
