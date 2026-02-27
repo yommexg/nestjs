@@ -15,7 +15,6 @@ export class AuthController {
 
   @Post('signup')
   signup(@Body(new ValidationPipe({ whitelist: true })) dto: AuthDto) {
-    console.log(dto);
     return this.authService.signup({
       ...dto,
       hash: dto.password,

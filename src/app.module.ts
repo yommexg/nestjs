@@ -11,8 +11,8 @@ import { LoggerModule } from './logger/logger.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { BookmarkUserModule } from './bookmark-user/bookmark-user.module';
-import { BookmarkModule } from './bookmark/bookmark.module';
+import { BookmarkUsersModule } from './bookmark-users/bookmark-users.module';
+import { BookmarksModule } from './bookmarks/bookmarks.module';
 import { ConfigModule } from './config/config.module';
 
 @Module({
@@ -22,22 +22,26 @@ import { ConfigModule } from './config/config.module';
     UsersModule,
     DatabaseModule,
     CompanyUsersModule,
-    ThrottlerModule.forRoot([
-      {
-        name: 'short',
-        ttl: 1000,
-        limit: 3,
-      },
-      {
-        name: 'long',
-        ttl: 60000,
-        limit: 100,
-      },
-    ]),
+    ThrottlerModule.forRoot(
+      process.env.NODE_ENV === 'test'
+        ? []
+        : [
+            {
+              name: 'short',
+              ttl: 1000,
+              limit: 3,
+            },
+            {
+              name: 'long',
+              ttl: 60000,
+              limit: 100,
+            },
+          ],
+    ),
     LoggerModule,
     ProfilesModule,
-    BookmarkUserModule,
-    BookmarkModule,
+    BookmarkUsersModule,
+    BookmarksModule,
   ],
   controllers: [AppController],
   providers: [
