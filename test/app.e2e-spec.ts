@@ -5,6 +5,7 @@ import * as pactum from 'pactum';
 import { AppModule } from 'src/app.module';
 import { AuthDto } from 'src/auth/dto';
 import { EditUserDto } from 'src/bookmark-users/dto';
+import { CreateBookmarkDto } from 'src/bookmarks/dto';
 import { DatabaseService } from 'src/database/database.service';
 
 describe('App (e2e)', () => {
@@ -179,14 +180,99 @@ describe('App (e2e)', () => {
   });
 
   describe('Bookmark', () => {
-    describe('Create Bookmark', () => {});
+    const dto: CreateBookmarkDto = {
+      title: 'Love',
+      link: 'https://github.com/yommexg/nestjs',
+      description: 'This is a nest js tutorial test',
+    };
 
-    describe('Get Bookmarks', () => {});
+    describe('Get empty Bookmarks', () => {
+      it('should get bookmarks', () => {
+        return pactum
+          .spec()
+          .get('/bookmarks')
+          .withBearerToken('$S{userAt}')
+          .expectStatus(200)
+          .expectBody([]);
+      });
+    });
 
-    describe('Get Bookmark By Id', () => {});
+    describe('Create Bookmark', () => {
+      it('should create bookmark', () => {
+        return pactum
+          .spec()
+          .post('/bookmarks')
+          .withBearerToken('$S{userAt}')
+          .withBody(dto)
+          .expectStatus(201)
+          .stores('bookmarkId', 'id');
+      });
+    });
 
-    describe('Edit Bookmark By Id', () => {});
+    describe('Get Bookmarks', () => {
+      it('should get bookmarks', () => {
+        return pactum
+          .spec()
+          .get('/bookmarks')
+          .withBearerToken('$S{userAt}')
+          .expectStatus(200)
+          .expectJsonLength(1);
+      });
+    });
 
-    describe('Delete Bookmark By Id', () => {});
+    describe('Get Bookmark By Id', () => {
+      it('should get bookmark by Id', () => {
+        return pactum
+          .spec()
+          .get('/bookmarks/{id}')
+          .withPathParams('id', '$S{bookmarkId}')
+          .withBearerToken('$S{userAt}')
+          .expectStatus(200)
+          .expectBodyContains('$S{bookmarkId}')
+          .expectBodyContains(dto.title);
+      });
+    });
+
+    describe('Edit Bookmark By Id', () => {
+      const editDto: CreateBookmarkDto = {
+        title: 'Github',
+        link: 'https://github.com/yommexg/nestjs',
+        description: 'This is a nest js tutorial test for github',
+      };
+
+      it('should edit bookmark', () => {
+        return pactum
+          .spec()
+          .patch('/bookmarks/{id}')
+          .withPathParams('id', '$S{bookmarkId}')
+          .withBody(editDto)
+          .withBearerToken('$S{userAt}')
+          .expectStatus(200)
+          .expectBodyContains('$S{bookmarkId}')
+          .expectBodyContains(editDto.title)
+          .inspect();
+      });
+    });
+
+    describe('Delete Bookmark By Id', () => {
+      it('should delete bookmark', () => {
+        return pactum
+          .spec()
+          .delete('/bookmarks/{id}')
+          .withPathParams('id', '$S{bookmarkId}')
+          .withBearerToken('$S{userAt}')
+          .expectStatus(204)
+          .inspect();
+      });
+
+      it('should get empty bookmarks', () => {
+        return pactum
+          .spec()
+          .get('/bookmarks')
+          .withBearerToken('$S{userAt}')
+          .expectStatus(200)
+          .expectJsonLength(0);
+      });
+    });
   });
 });
