@@ -57,3 +57,13 @@ export type Bookmark = Prisma.BookmarkModel
  * 
  */
 export type JwtUser = Prisma.JwtUserModel
+/**
+ * Model TodoUser
+ * 
+ */
+export type TodoUser = Prisma.TodoUserModel
+/**
+ * Model Todo
+ * 
+ */
+export type Todo = Prisma.TodoModel

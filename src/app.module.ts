@@ -15,6 +15,8 @@ import { BookmarkUsersModule } from './bookmark-users/bookmark-users.module';
 import { BookmarksModule } from './bookmarks/bookmarks.module';
 import { ConfigModule } from './config/config.module';
 import { JwtAuthModule } from './jwt-auth/jwt-auth.module';
+import { TodosModule } from './todos/todos.module';
+import { TodoUsersModule } from './todo-users/todo-users.module';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { JwtAuthModule } from './jwt-auth/jwt-auth.module';
     BookmarkUsersModule,
     BookmarksModule,
     JwtAuthModule,
+    TodosModule,
+    TodoUsersModule,
   ],
   controllers: [AppController],
   providers: [

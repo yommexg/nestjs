@@ -66,3 +66,38 @@ model JwtUser {
 
   @@map("jwt-users")
 }
+
+model TodoUser {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email          String       @unique
+  firstName      String  
+  lastName       String
+
+  todos Todo[]
+
+  @@map("todo-users")
+}
+
+model Todo {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title             String       @unique
+  description       String?   
+  status            TodoStatus   @default(OPEN)
+
+  userId   Int
+  user     TodoUser   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("todos")
+}
+
+enum TodoStatus {
+  OPEN
+  IN_PROGRESS
+  DONE
+}

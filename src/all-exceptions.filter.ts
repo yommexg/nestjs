@@ -77,7 +77,7 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
       if (exception.code === 'P2002') {
         responseObject.statusCode = HttpStatus.CONFLICT;
         responseObject.response = {
-          message: 'Account Exist',
+          message: 'Duplicate Fields',
           fields: this.getUniqueFields(exception),
         };
       } else {

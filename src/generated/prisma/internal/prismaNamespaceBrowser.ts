@@ -54,7 +54,9 @@ export const ModelName = {
   User: 'User',
   BookmarkUser: 'BookmarkUser',
   Bookmark: 'Bookmark',
-  JwtUser: 'JwtUser'
+  JwtUser: 'JwtUser',
+  TodoUser: 'TodoUser',
+  Todo: 'Todo'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -121,6 +123,31 @@ export const JwtUserScalarFieldEnum = {
 } as const
 
 export type JwtUserScalarFieldEnum = (typeof JwtUserScalarFieldEnum)[keyof typeof JwtUserScalarFieldEnum]
+
+
+export const TodoUserScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  email: 'email',
+  firstName: 'firstName',
+  lastName: 'lastName'
+} as const
+
+export type TodoUserScalarFieldEnum = (typeof TodoUserScalarFieldEnum)[keyof typeof TodoUserScalarFieldEnum]
+
+
+export const TodoScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  userId: 'userId'
+} as const
+
+export type TodoScalarFieldEnum = (typeof TodoScalarFieldEnum)[keyof typeof TodoScalarFieldEnum]
 
 
 export const SortOrder = {
