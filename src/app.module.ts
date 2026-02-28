@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { BookmarkUsersModule } from './bookmark-users/bookmark-users.module';
 import { BookmarksModule } from './bookmarks/bookmarks.module';
 import { ConfigModule } from './config/config.module';
+import { JwtAuthModule } from './jwt-auth/jwt-auth.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { ConfigModule } from './config/config.module';
     ProfilesModule,
     BookmarkUsersModule,
     BookmarksModule,
+    JwtAuthModule,
   ],
   controllers: [AppController],
   providers: [

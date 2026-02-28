@@ -386,7 +386,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   BookmarkUser: 'BookmarkUser',
-  Bookmark: 'Bookmark'
+  Bookmark: 'Bookmark',
+  JwtUser: 'JwtUser'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -402,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "bookmarkUser" | "bookmark"
+    modelProps: "user" | "bookmarkUser" | "bookmark" | "jwtUser"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -628,6 +629,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    JwtUser: {
+      payload: Prisma.$JwtUserPayload<ExtArgs>
+      fields: Prisma.JwtUserFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JwtUserFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JwtUserFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>
+        }
+        findFirst: {
+          args: Prisma.JwtUserFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JwtUserFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>
+        }
+        findMany: {
+          args: Prisma.JwtUserFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>[]
+        }
+        create: {
+          args: Prisma.JwtUserCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>
+        }
+        createMany: {
+          args: Prisma.JwtUserCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JwtUserCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>[]
+        }
+        delete: {
+          args: Prisma.JwtUserDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>
+        }
+        update: {
+          args: Prisma.JwtUserUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>
+        }
+        deleteMany: {
+          args: Prisma.JwtUserDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JwtUserUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JwtUserUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>[]
+        }
+        upsert: {
+          args: Prisma.JwtUserUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JwtUserPayload>
+        }
+        aggregate: {
+          args: Prisma.JwtUserAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJwtUser>
+        }
+        groupBy: {
+          args: Prisma.JwtUserGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JwtUserGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JwtUserCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JwtUserCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -703,6 +778,18 @@ export const BookmarkScalarFieldEnum = {
 } as const
 
 export type BookmarkScalarFieldEnum = (typeof BookmarkScalarFieldEnum)[keyof typeof BookmarkScalarFieldEnum]
+
+
+export const JwtUserScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  email: 'email',
+  hash: 'hash',
+  hashedRt: 'hashedRt'
+} as const
+
+export type JwtUserScalarFieldEnum = (typeof JwtUserScalarFieldEnum)[keyof typeof JwtUserScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -902,6 +989,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   bookmarkUser?: Prisma.BookmarkUserOmit
   bookmark?: Prisma.BookmarkOmit
+  jwtUser?: Prisma.JwtUserOmit
 }
 
 /* Types for Logging */

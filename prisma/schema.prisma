@@ -55,3 +55,14 @@ model Bookmark {
 
   @@map("bookmarks")
 }
+model JwtUser {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email     String   @unique
+  hash      String
+  hashedRt  String?   
+
+  @@map("jwt-users")
+}

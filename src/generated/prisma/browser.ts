@@ -32,3 +32,8 @@ export type BookmarkUser = Prisma.BookmarkUserModel
  * 
  */
 export type Bookmark = Prisma.BookmarkModel
+/**
+ * Model JwtUser
+ * 
+ */
+export type JwtUser = Prisma.JwtUserModel

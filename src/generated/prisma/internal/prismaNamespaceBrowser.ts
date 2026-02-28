@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   BookmarkUser: 'BookmarkUser',
-  Bookmark: 'Bookmark'
+  Bookmark: 'Bookmark',
+  JwtUser: 'JwtUser'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -108,6 +109,18 @@ export const BookmarkScalarFieldEnum = {
 } as const
 
 export type BookmarkScalarFieldEnum = (typeof BookmarkScalarFieldEnum)[keyof typeof BookmarkScalarFieldEnum]
+
+
+export const JwtUserScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  email: 'email',
+  hash: 'hash',
+  hashedRt: 'hashedRt'
+} as const
+
+export type JwtUserScalarFieldEnum = (typeof JwtUserScalarFieldEnum)[keyof typeof JwtUserScalarFieldEnum]
 
 
 export const SortOrder = {
