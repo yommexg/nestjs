@@ -30,6 +30,9 @@ describe('App (e2e)', () => {
   });
 
   afterAll(async () => {
+    await database.cleanDb();
+
+    await database.$disconnect();
     await app.close();
   });
 
@@ -249,8 +252,7 @@ describe('App (e2e)', () => {
           .withBearerToken('$S{userAt}')
           .expectStatus(200)
           .expectBodyContains('$S{bookmarkId}')
-          .expectBodyContains(editDto.title)
-          .inspect();
+          .expectBodyContains(editDto.title);
       });
     });
 
@@ -261,8 +263,7 @@ describe('App (e2e)', () => {
           .delete('/bookmarks/{id}')
           .withPathParams('id', '$S{bookmarkId}')
           .withBearerToken('$S{userAt}')
-          .expectStatus(204)
-          .inspect();
+          .expectStatus(204);
       });
 
       it('should get empty bookmarks', () => {

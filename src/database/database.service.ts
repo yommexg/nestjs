@@ -18,8 +18,8 @@ export class DatabaseService extends PrismaClient {
     return this.$transaction([
       this.todo.deleteMany(),
       this.todoUser.deleteMany(),
-      // this.bookmark.deleteMany(),
-      // this.bookmarkUser.deleteMany(),
+      this.bookmark.deleteMany(),
+      this.bookmarkUser.deleteMany(),
     ]);
   }
 }
